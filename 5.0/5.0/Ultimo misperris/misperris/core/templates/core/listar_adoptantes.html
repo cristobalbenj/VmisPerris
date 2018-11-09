@@ -1,0 +1,65 @@
+{% extends 'core/menu.html' %}
+
+
+
+{% block titulo %}
+
+{% endblock %}
+{% block contenedor %}
+{{mensaje}}
+<h2 id="titulo2menu">Listado de Adoptantes</h2>
+<br>
+<br>
+<br>
+<br>
+<table align="center">
+    <tr>
+        <th>Nombre</th>
+        <th>Rut</th>
+        <th>Email</th>
+        <th>Telefono</th>
+        <th>Direccion</th>
+        <th>Genero</th>
+        <th>Region</th>
+        <th>Ciudad</th>
+        <th>Vivienda</th>
+        <th>Mascota</th>
+        <th>Opciones</th>
+    </tr>
+
+    {% for a in adop %}
+
+    <tr>
+        <!--los nombres ingresados deben ser igual a los parametros establecidos en las tablas (models.py)-->
+        <td>{{ a.nombre }}</td>
+        <td>{{ a.rut }}</td>
+        <td>{{ a.email }}</td>
+        <td>{{ a.tel }}</td>
+        <td>{{ a.direccion }}</td>
+        <td>{{ a.genero.genero }}</td>
+        <td>{{ a.region.nombre }}</td>
+        <td>{{ a.ciudad.nombre }}</td>
+        <td>{{ a.vivienda.descripcion }}</td>
+        <td>{{ a.mascota.nombre }}</td>
+        <td>
+            <a href="{% url 'eliminar_adoptante' a.id %}">Eliminar</a>
+            <a href="{% url 'modificar_adoptante' a.id %}">Modificar</a>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% if messages %}
+
+    {% for m in messages %}
+
+    <div>{{ m }}</div>
+
+    {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}

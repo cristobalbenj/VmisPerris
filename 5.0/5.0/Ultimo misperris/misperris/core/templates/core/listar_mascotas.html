@@ -1,0 +1,55 @@
+{% extends 'core/menu.html' %}
+
+
+
+{% block titulo %}
+
+{% endblock %}
+{% block contenedor %}
+{{mensaje}}
+<h2 id="titulo2menu">Listado de Mascotas</h2>
+<br>
+<br>
+<br>
+<br>
+<table align="center">
+    <tr>
+        <th id="td2listar1">Nombre</th>
+        <th id="td2listar2">Raza</th>
+        <th id="td2listar3">Genero</th>
+        <th id="td2listar4">Imagen</th>
+        <th id="td2listar5">Estado</th>
+        <th id="td2listar6">Opciones</th>
+    </tr>
+
+    {% for a in mascotas %}
+
+    <tr>
+        <!--los nombres ingresados deben ser igual a los parametros establecidos en las tablas (models.py)-->
+        <td id="td2listar1">{{ a.nombre }}</td>
+        <td id="td2listar2">{{ a.raza.nombre }}</td>
+        <td id="td2listar3">{{ a.genero.genero }}</td>
+        <td id="td2listar4">{{ a.imagen }}</td>
+        <td id="td2listar5">{{ a.estado.tipoEstado }}</td>
+        <td>
+            <a id="td2listar6" href="{% url 'eliminar_mascota' a.id %}">Eliminar</a>
+            <a id="td2listar7" href="{% url 'modificar_mascota' a.id %}">Modificar</a>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% if messages %}
+
+    {% for m in messages %}
+
+    <div>{{ m }}</div>
+
+    {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'core/menu.html' %}
+
+{% block titulo %}
+    Ingreso de Mascotas
+{% endblock %}
+{% block contenedor %}
+<div align="center">
+    <h1>formulario de ingreso de mascotas</h1>
+</div>
+
+    <form action="" id="FormularioMascotas" method="POST">
+        <!--evita que los datos vengan de una fuente externa al navegador ej:correo electronico-->
+        {% csrf_token %}
+        <table align="center" border="1">
+            <tr>
+                <td>Nombre:</td>
+                <td>
+                    <input type="text"  placeholder="ej: Firulais" name="txtNombre" id="txtNombre">
+                </td>
+            </tr>
+            <tr>
+                <td for="">Raza:</td>
+                <td>
+                    <select name="cboRaza" id="cboRaza">
+                        <option value="">Seleccionar</option>
+
+                        {% for m in razas %}
+
+                        <option value="{{ m.id }}">{{ m.nombre }}</option>
+
+                        {% endfor %}
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td for="">Genero:</td>
+                <td>
+                    <select name="cboGenero" id="cboGenero">
+                        <option value="">Seleccionar</option>
+
+                        {% for m in generos %}
+
+                        <option value="{{ m.id }}">{{ m.genero }}</option>
+
+                        {% endfor %}
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Estado:</td>
+                <td>
+                    <select name="cboEstado" id="cboEstado">
+                        <option value="">Seleccionar</option>
+
+                        {% for m in estados %}
+
+                        <option value="{{ m.id }}">{{ m.tipoEstado }}</option>
+
+                        {% endfor %}
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Fotografia:</td>
+                <td>
+                    <input type="file" name="file_foto" id="file_foto" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Grabar"/>
+                    <input type="reset" value="Limpiar"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+<h3>{{ mensaje }}</h3>
+
+{% endblock %}

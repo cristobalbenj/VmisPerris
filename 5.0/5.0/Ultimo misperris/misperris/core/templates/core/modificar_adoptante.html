@@ -1,0 +1,164 @@
+{% extends 'core/menu.html' %}
+
+{% block titulo %}
+Ingreso de Mascotas
+{% endblock %}
+{% block contenedor %}
+<div align="center">
+    <h1>formulario de ingreso de Adoptantes</h1>
+</div>
+
+<form action="" id="FormularioMascotas" method="POST">
+    <!--evita que los datos vengan de una fuente externa al navegador ej:correo electronico-->
+    {% csrf_token %}
+
+    <input type="hidden" name="txtId" id="txtId" value="{{ adop.id }}">
+
+    <table align="center" border="1">
+        <tr>
+            <td>Nombre:</td>
+            <td>
+                <input type="text" placeholder="ej: asasasda" name="txtNombre" id="txtNombre" value="{{ adop.nombre }}">
+            </td>
+        </tr>
+        <tr>
+            <td>Rut:</td>
+            <td>
+                <input type="text" placeholder="ej: 18697695-8" name="txtRut" id="txtRut" value="{{ adop.rut }}">
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input type="text" placeholder="ej: asdasd@gmail.com" name="txtCorreo" id="txtCorreo" value="{{ adop.email }}">
+            </td>
+        </tr>
+        <tr>
+            <td>Telefono:</td>
+            <td>
+                <input type="number" placeholder="ej: 12345678" name="txtTelefono" id="txtTelefono" value="{{  adop.tel}}">
+            </td>
+        </tr>
+        <tr>
+            <td>Direccion:</td>
+            <td>
+                <input type="text" placeholder="ej: pasaje bla bla bla..." name="txtDireccion" id="txtDireccion" value="{{ adop.direccion }}">
+            </td>
+        </tr>
+        <tr>
+            <td for="">Genero:</td>
+            <td>
+                <select name="cboGeneroAdoptante" id="cboGeneroAdoptante">
+                    <option value="">Seleccionar</option>
+
+                    {% for m in generos %}
+
+                    <option 
+                    
+                    {% if m.id == adop.genero.id %}
+                    {{'selected'}}
+                    {% endif %}
+
+                    value="{{ m.id }}">{{ m.genero }}</option>
+
+                    {% endfor %}
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td for="">Region:</td>
+            <td>
+                <select name="cboRegion" id="cboRegion">
+                    <option value="">Seleccionar</option>
+
+                    {% for m in regiones %}
+
+                    <option 
+                    
+                    {% if m.id == adop.region.id %}
+                    {{'selected'}}
+                    {% endif %}
+
+                    value="{{ m.id }}">{{ m.nombre }}</option>
+
+                    {% endfor %}
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Ciudad:</td>
+            <td>
+                <select name="cboCiudad" id="cboCiudad">
+                    <option value="">Seleccionar</option>
+
+                    {% for m in ciudades %}
+
+                    <option 
+                    
+                    {% if m.id == adop.ciudad.id %}
+                    {{'selected'}}
+                    {% endif %}
+                    
+                    value="{{ m.id }}">{{ m.nombre }}</option>
+
+                    {% endfor %}
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Vivienda:</td>
+            <td>
+                <select name="cboVivienda" id="cboVivienda">
+                    <option value="">Seleccionar</option>
+
+                    {% for m in viviendas %}
+
+                    <option 
+                    
+                    {% if m.id == adop.vivienda.id %}
+                    {{'selected'}}
+                    {% endif %}
+                    
+                    value="{{ m.id }}">{{ m.descripcion }}</option>
+
+                    {% endfor %}
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Mascota:</td>
+            <td>
+                <select name="cboMascota" id="cboMascota">
+                    <option value="">Seleccionar</option>
+
+                    {% for m in mascotas %}
+
+                    <option 
+                    
+                    {% if m.id == adop.mascota.id %}
+                    {{'selected'}}
+                    {% endif %}
+                    
+                    value="{{ m.id }}">{{ m.nombre }}</option>
+
+                    {% endfor %}
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Grabar" />
+                <input type="reset" value="Limpiar" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+<h3>{{ mensaje }}</h3>
+
+{% endblock %}
